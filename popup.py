@@ -1,6 +1,6 @@
 from tkinter import *
 
-class window:
+class Window:
 
 	def __init__(self, usr_msg_mail, usr_file, usr_person):
 		self.msg_mail = usr_msg_mail
@@ -35,7 +35,7 @@ class window:
 		mail.insert(INSERT, self.msg_mail)
 
 		mail.focus()
-		mail.tag_add(SEL, "1.12", "1.25")
+		mail.tag_add(SEL, "1.12", "1.24")
 		mail.mark_set(INSERT, "1.12")
 		mail.see(INSERT)
 
