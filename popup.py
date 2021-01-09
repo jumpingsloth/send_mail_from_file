@@ -1,55 +1,56 @@
 from tkinter import *
 
-def gui(msg_mail):
+class window:
 
-	def exit_gui(send):
-		if send:
-			output = mail.get(1.0, "end-1c")
-			print(output)
-			root.destroy()
-			return output
-		else:
-			root.destroy()
-			return False
+	def __init__(self, usr_msg_mail, usr_file, usr_person):
+		self.msg_mail = usr_msg_mail
+		self.file = usr_file
+		self.person = usr_person
+		self.ed_msg_mail = ''
 
-	# root
-	root = Tk()
-	root.title("Sending Message")
-	root.resizable(False, False)
+	def popup(self):
 
-	# heading
-	file = "some_file.pdf"
-	person = "Some Person"
-	msg = f"Sending email with {file} to {person}."
+		def exit_gui(send):
+			if send:
+				self.ed_msg_mail = mail.get(1.0, "end-1c")
+				root.destroy()
+			else:
+				self.output = FALSE
+				root.destroy()
+		
+		# root
+		root = Tk()
+		root.title("Sending Message")
+		root.resizable(False, False)
 
-	message = Label(root, text=msg, font='none 13 bold')
-	message.grid(row=0, column=0, columnspan=4, pady=10, padx=10)
+		# heading
+		msg = f"Sending email with {self.file} to {self.person}."
 
-	# message
-	mail = Text(root, height=20, width=40)
-	mail.grid(row=1, column=0, columnspan=4, pady=10)
-	mail.insert(INSERT, msg_mail)
+		message = Label(root, text=msg, font='none 13 bold')
+		message.grid(row=0, column=0, columnspan=4, pady=10, padx=10)
 
-	mail.focus()
-	mail.tag_add(SEL, "1.12", "1.25")
-	mail.mark_set(INSERT, "1.12")
-	mail.see(INSERT)
+		# message
+		mail = Text(root, height=20, width=40)
+		mail.grid(row=1, column=0, columnspan=4, pady=10)
+		mail.insert(INSERT, self.msg_mail)
 
-	# buttons
-	empty1 = Label(root, text='').grid(row=2, column=0)
+		mail.focus()
+		mail.tag_add(SEL, "1.12", "1.25")
+		mail.mark_set(INSERT, "1.12")
+		mail.see(INSERT)
 
-	button2 = Button(root, text="Cancel", command= lambda: exit_gui(False))
-	button2.grid(row=2, column=1, pady=10)
+		# buttons
+		empty1 = Label(root, text='')
+		empty1.grid(row=2, column=0)
 
-	button1 = Button(root, text="Send", font="none 10 bold", command= lambda: exit_gui(True))
-	button1.grid(row=2, column=2, pady=10)
+		button2 = Button(root, text="Cancel", command= lambda: exit_gui(False))
+		button2.grid(row=2, column=1, pady=10)
 
-	empty2 = Label(root, text='').grid(row=2, column=3)
+		button1 = Button(root, text="Send", font="none 10 bold", command= lambda: exit_gui(True))
+		button1.grid(row=2, column=2, pady=10)
 
-	# root
-	root.mainloop()
+		empty2 = Label(root, text='')
+		empty2.grid(row=2, column=3)
 
-if __name__ == "__main__":
-	msg_mail = "Sehr geehrte<r> <andrede> Rachuj,\n\nanbei"
-	print(gui(msg_mail))
-	
+		# root
+		root.mainloop()
