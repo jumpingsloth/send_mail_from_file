@@ -6,4 +6,4 @@ anbei die Datei '{}'.
 
 Mit freundlichen Gruessen
 
-Samuel Mueller
+My Name

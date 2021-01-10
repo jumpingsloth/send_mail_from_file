@@ -1,9 +1,11 @@
 import toml
+from os.path import expanduser
 
 class Data:
 
 	def __init__(self):
-		self.config = toml.load('config.toml')
+		config_file = expanduser('~/.send_file/config.toml')
+		self.config = toml.load(config_file)
 		self.dir = self.config["userconfig"]["directory"]
 		
 		self.host = self.config["userconfig"]["host"]
@@ -13,12 +15,11 @@ class Data:
 
 	def read_template(self, person, file):
 		# read mail template from file
-		f = open("mail_template.txt", 'r')
-
-		msg_mail = f.read()
-		msg_mail = msg_mail.format(person, file)
-
-		f.close
+		template_file = expanduser('~/.send_file/mail_template.txt')
+		msg_mail = ''
+		with open(template_file, 'r') as f:
+			msg_mail = f.read()
+			msg_mail = msg_mail.format(person, file)
 
 		return msg_mail
 
