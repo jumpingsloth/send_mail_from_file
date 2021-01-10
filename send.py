@@ -1,4 +1,4 @@
-import email, smtplib, ssl
+import email, smtplib, ssl, os
 
 from email import encoders
 from email.mime.base import MIMEBase
@@ -11,6 +11,8 @@ class Send:
 
 	def send_mail(self, adress_to, subject, message, file):
 		data = Data()
+
+		filename = os.path.basename(file)
 
 		msg_mail = MIMEMultipart()
 		msg_mail["From"] = data.adress_from
@@ -28,11 +30,11 @@ class Send:
 
 		part.add_header(
 			"Content-Disposition",
-			f"attachment, filename= {filename}"
+			f"attachment; filename= {filename}"
 		)
 
 		msg_mail.attach(part)
-		text = message.as_string()
+		text = msg_mail.as_string()
 
 		context = ssl.create_default_context()
 		with smtplib.SMTP_SSL(data.host, data.port, context=context) as server:
