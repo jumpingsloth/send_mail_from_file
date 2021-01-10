@@ -12,8 +12,8 @@ class Window:
 		self.person = ''
 		self.msg_mail = self.data.read_template(self.person, self.file)
 
-		self.adress_from = self.data.read_adress_from()
-		self.adress_to =  self.data.read_adress_to(self.person)
+		self.adress_to = ''
+		self.subject = ''
 
 		self.ed_msg_mail = ''
 
@@ -26,10 +26,14 @@ class Window:
 
 		def exit_gui(send):
 			if send:
+				self.adress_to = to.get()
+				self.subject = subject.get()
 				self.ed_msg_mail = mail.get(1.0, "end-1c")
 				root.destroy()
 			else:
-				self.output = FALSE
+				self.ed_msg_mail = False
+				self.subject = False
+				self.adress_to = False
 				root.destroy()
 		
 		def enter_person(keystroke):
@@ -41,12 +45,13 @@ class Window:
 			mail.delete(1.0, END)
 			mail.insert(INSERT, self.msg_mail)
 			
+			self.adress_to = self.data.read_adress_to(self.person)
 			to.delete(0, END)
 			to.insert(INSERT, self.adress_to)
 
 		# heading
 		msg = StringVar()
-		msg.set(f"Sending email with {self.file} to _________\n")
+		msg.set(f"Sending email with {self.file} to _____\n")
 
 		message = Label(root, textvariable=msg, font='none 13 bold')
 		message.grid(row=0, column=0, columnspan=4, pady=10, padx=10)
@@ -57,7 +62,7 @@ class Window:
 
 		from_adress = Entry(root, width=40)
 		from_adress.grid(row=1, column=1, columnspan=3, pady=10, padx=20)
-		from_adress.insert(INSERT, self.adress_from)
+		from_adress.insert(INSERT, self.data.adress_from)
 
 		# to
 		to_label = Label(root, text="To:")

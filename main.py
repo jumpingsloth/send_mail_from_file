@@ -1,9 +1,11 @@
 import time
+import os
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
 from popup import Window
 from read_data import Data
+from send import Send
 
 ################
 # popup window #
@@ -11,12 +13,14 @@ from read_data import Data
 	
 def ask_usr(file):
 	# ask user to send
-	win = Window(file)
+	base_file = os.path.basename(file)
+
+	win = Window(base_file)
+	mail = Send()
 
 	win.popup()
-	if win.ed_msg_mail:
-		print(win.ed_msg_mail)
-
+	if win.ed_msg_mail and win.adress_to and win.subject:
+		mail.send_mail(win.adress_to, win.subject, win.ed_msg_mail, file)
 
 ###############################
 # wait for new file in folder #
@@ -35,7 +39,10 @@ def on_modified(event):
 def on_moved(event):
 	print(f"{event.src_path} was moved to {event.dest_path}")
 
+
 class Watchdir:
+
+	data = Data()
 
 	patterns = "*"
 	ignore_patterns = ""
@@ -48,7 +55,7 @@ class Watchdir:
 	event_handler.on_modified = on_modified
 	event_handler.on_moved = on_moved
 
-	path = "."
+	path = data.dir
 	go_recursively = True
 	observer = Observer()
 	observer.schedule(event_handler, path, recursive=go_recursively)
@@ -67,7 +74,5 @@ class Watchdir:
 ################
 
 if __name__ == "__main__":
-	# wd = Watchdir()
-	# wd.run_watch()
-	ask_usr("somefile")
-
+	wd = Watchdir()
+	wd.run_watch()

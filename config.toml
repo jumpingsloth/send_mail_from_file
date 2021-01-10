@@ -1,0 +1,11 @@
+[userconfig]
+directory = ""
+host = "smtp.1und1.de"
+port = 465
+adress = "my@mail.com"
+password = "my password"
+
+[contacts]
+myself = "myself@email.com"
+
+
