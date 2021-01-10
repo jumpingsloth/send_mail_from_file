@@ -7,6 +7,7 @@ class Data:
 		config_file = expanduser('~/.send_file/config.toml')
 		self.config = toml.load(config_file)
 		self.dir = self.config["userconfig"]["directory"]
+		self.sent_dir = self.config["userconfig"]["sent_directory"]
 		
 		self.host = self.config["userconfig"]["host"]
 		self.port = self.config["userconfig"]["port"]

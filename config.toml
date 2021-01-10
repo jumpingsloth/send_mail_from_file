@@ -1,11 +1,12 @@
 [userconfig]
-directory = ""
-host = "smtp.1und1.de"
+directory = "/path/to/dir"
+sent_directory = "/path/to/dir"
+host = "smtp.hostname.com"
 port = 465
 adress = "my@mail.com"
-password = "my password"
+password = "my_password"
 
 [contacts]
-myself = "myself@email.com"
-
+person1 = "person1@mail.com"
+person2 = "person2@mail.com"
 

@@ -15,12 +15,16 @@ def ask_usr(file):
 	# ask user to send
 	base_file = os.path.basename(file)
 
+	data = Data()
 	win = Window(base_file)
 	mail = Send()
 
 	win.popup()
 	if win.ed_msg_mail and win.adress_to and win.subject:
 		mail.send_mail(win.adress_to, win.subject, win.ed_msg_mail, file)
+	
+	destination = data.sent_dir + base_file
+	os.rename(file, destination)
 
 ###############################
 # wait for new file in folder #

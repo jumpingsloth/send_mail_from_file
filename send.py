@@ -18,7 +18,6 @@ class Send:
 		msg_mail["From"] = data.adress_from
 		msg_mail["To"] = adress_to
 		msg_mail["Subject"] = subject
-		msg_mail["Bcc"] = data.adress_from
 
 		msg_mail.attach(MIMEText(message, 'plain'))
 
