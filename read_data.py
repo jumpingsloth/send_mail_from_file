@@ -17,7 +17,7 @@ class Data:
 		# read mail template from file
 		template_file = expanduser('~/.send_file/mail_template.txt')
 		msg_mail = ''
-		with open(template_file, 'r') as f:
+		with open(template_file, 'r', encoding='utf-8') as f:
 			msg_mail = f.read()
 			msg_mail = msg_mail.format(person, file)
 
