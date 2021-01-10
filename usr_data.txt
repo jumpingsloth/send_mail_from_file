@@ -1,2 +1,11 @@
+###### Directory ######
+
 C:\Users\samue\Documents\Send_File_To
+
+###### Email adress ######
+
 samuel@kiwisound.de
+
+###### Contacts ######
+
+Samuel samuel@kiwisound.de

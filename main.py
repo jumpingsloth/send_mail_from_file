@@ -1,33 +1,27 @@
-from popup import Window
 import time
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
-def read_metadata():
-	return False
-	# read metadata from file
+from popup import Window
+from read_data import Data
+
+################
+# popup window #
+################
 	
 def ask_usr(file):
 	# ask user to send
-	person = read_metadata()
-	win = Window(read_template(person, file), file, person)
+	win = Window(file)
 
 	win.popup()
 	if win.ed_msg_mail:
 		print(win.ed_msg_mail)
 
-def read_template(person, file):
-	# read mail template from file
-	f = open("mail_template.txt", 'r')
 
-	msg_mail = f.read()
-	msg_mail = msg_mail.format(person, file)
+###############################
+# wait for new file in folder #
+###############################
 
-	f.close
-
-	return msg_mail
-
-# wait for new file in folder
 def on_created(event):
 	print(f"{event.src_path} was created")
 	ask_usr(event.src_path)
@@ -68,7 +62,12 @@ class Watchdir:
 			self.observer.stop()
 			self.observer.join()
 
-if __name__ == "__name__":
-	wd = Watchdir()
-	wd.run_watch()
+################
+# main routine #
+################
+
+if __name__ == "__main__":
+	# wd = Watchdir()
+	# wd.run_watch()
+	ask_usr("somefile")
 
