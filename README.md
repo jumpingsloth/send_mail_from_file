@@ -1,2 +1,3 @@
 # send_mail_from_file
-test
+
+Send a file as email attachment, when moving to directory.
